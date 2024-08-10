@@ -1,0 +1,167 @@
+package com.aes.touristmanagement.serviceImpl;
+
+import com.aes.touristmanagement.model.*;
+import com.aes.touristmanagement.service.TouristService;
+
+import java.util.*;
+
+public class TouristServiceImpl implements TouristService {
+	Scanner sc=new Scanner(System.in);
+	List<Tour> tourList=new ArrayList<>();
+	List<Guide> guideList=new ArrayList<>();
+	List<Group> groupList=new ArrayList<>();
+	List<Tourist> touristList=new ArrayList<>();
+	
+	@Override
+	public void addTour() {
+		Tour tour=new Tour();
+		System.out.println("Enter tour ID:");
+		int tid=sc.nextInt();
+		tour.setTid(tid);
+		System.out.println("Enter tour name: ");
+		String tname=sc.next();
+		tour.setTname(tname);
+		tourList.add(tour);
+		System.out.println("Tour Details add successfully.......");
+	}
+	
+	@Override
+	public void viewTour() {
+		System.out.println("Following are detais--------");
+		for(Tour tour:tourList) {
+			System.out.println("Tour ID: "+tour.getTid());
+			System.out.println("Tour name: "+tour.getTname());
+		}
+	}
+	
+	public void addGuide() {
+		boolean gflag=false;
+		Guide guide=new Guide();
+		System.out.println("Enter guide ID: ");
+		int gid=sc.nextInt();
+		guide.setGid(gid);
+		System.out.println("Enter guide name: ");
+		String gname=sc.next();
+		guide.setGname(gname);
+		System.out.println("Enter tour id for guide: ");
+		int tid=sc.nextInt();
+		for(Tour tour:tourList) {
+			if(tid==tour.getTid()){
+				guide.setTour(tour);
+				guideList.add(guide);
+				gflag=true;
+				break;
+			}
+		}
+		if(gflag) {
+			System.out.println("Details added successfully.....");
+		}
+		else {
+			System.out.println("Please enter valid ID");
+		}
+		
+	}
+	
+	public void viewGuide() {
+		System.out.println("Following are details......");
+		for(Guide guide:guideList) {
+			System.out.println("Tour ID "+guide.getTour().getTid());
+			System.out.println("Tour name "+guide.getTour().getTname());
+			System.out.println("Guide ID "+guide.getGid());
+			System.out.println("Guide name "+guide.getGname());
+		}
+	}
+	
+	@Override
+	public void addGroup() {
+		boolean gflag=false;
+		Group group=new Group();
+		System.out.println("Enter group id: ");
+		int gid=sc.nextInt();
+		group.setGid(gid);
+		System.out.println("Enter group name: ");
+		String gname=sc.next();
+		group.setGname(gname);
+		System.out.println("Enter guide id for group: ");
+		int gidGuide=sc.nextInt();
+		for(Guide guide:guideList) {
+			if(gidGuide==guide.getGid()) {
+				group.setGuide(guide);
+				groupList.add(group);
+				gflag=true;
+				break;
+			}
+		}
+		if(gflag) {
+			System.out.println("Group Details added successfully.....");
+		}
+		else {
+			System.out.println("Please enter valid ID");
+		}
+		
+	}
+	
+	@Override
+	public void viewGroup() {
+		System.out.println("Following are details--------");
+		for(Group group:groupList) {
+			System.out.println("Tour Id: "+group.getGuide().getTour().getTid());
+			System.out.println("Tour name: "+group.getGuide().getTour().getTname());
+			System.out.println("Guide ID: "+group.getGuide().getGid());
+			System.out.println("Guide name: "+group.getGuide().getGname());
+			System.out.println("Group Id: "+group.getGid());
+			System.out.println("Group name: "+group.getGname());
+		}
+	}
+	
+	@Override
+	public void addTourist() {
+		boolean tflag=false;
+		Tourist tourist=new Tourist();
+		System.out.println("Enter tourist id: ");
+		int tid=sc.nextInt();
+		tourist.setTid(tid);
+		System.out.println("Enter tourist name: ");
+		String tname=sc.next();
+		tourist.setTname(tname);
+		System.out.println("Enter tourist id for group: ");
+		int gid=sc.nextInt();
+		for(Group group:groupList) {
+			if(gid==group.getGid()) {
+				tourist.setGroup(group);
+				touristList.add(tourist);
+				tflag=true;
+				break;
+			}
+		}
+		if(tflag) {
+			System.out.println("Tourist Details added successfully.....");
+		}
+		else {
+			System.out.println("Please enter valid ID");
+		}
+		
+	}
+	
+	@Override
+    public void viewTourist() {
+        System.out.println("Following are the tourist details:");
+        for (Tourist tourist : touristList) {
+            System.out.println("Tour Id: " + tourist.getGroup().getGuide().getTour().getTid());
+            System.out.println("Tour Name: " + tourist.getGroup().getGuide().getTour().getTname());
+            System.out.println("Guide Id: " + tourist.getGroup().getGuide().getGid());
+            System.out.println("Guide Name: " + tourist.getGroup().getGuide().getGname());
+            System.out.println("Group Id: " + tourist.getGroup().getGid());
+            System.out.println("Group Name: " + tourist.getGroup().getGname());
+            System.out.println("Tourist Id: " + tourist.getTid());
+            System.out.println("Tourist Name: " + tourist.getTname());
+        }
+    }
+
+	}
+	
+	
+	
+	
+	
+

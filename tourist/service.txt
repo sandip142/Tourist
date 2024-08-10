@@ -1,0 +1,5 @@
+package com.aes.touristmanagement.service;
+
+public interface service {
+
+}

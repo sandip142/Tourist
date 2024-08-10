@@ -1,0 +1,12 @@
+package com.aes.touristmanagement.service;
+
+public interface TouristService{
+	void addTour();
+	void viewTour();
+	void addGuide();
+	void viewGuide();
+	void addGroup();
+	void viewGroup();
+	void addTourist();
+	void viewTourist();
+}
