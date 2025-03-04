@@ -1,6 +1,6 @@
 package com.aes.touristmanagement.model;
 //Contains data model classes (Tour, Guide, Group, Tourist).
-
+// hii i am sandip
 public class Group{
 	private int gid;
 	private String gname;
